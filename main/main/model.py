@@ -52,7 +52,6 @@ class BaseModel(models.Model):
 
     objects = BaseModelManager()
     all_objects = models.Manager()
-    features = models.ManyToManyField('plans.Features', related_name='%(class)s_features', blank=True)
 
     class Meta:
         abstract = True

@@ -10,10 +10,19 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
+
+import logging
 from pathlib import Path
 import environ
 import os
 
+
+
+# تنظیمات لاگینگ برای نمایش پیام‌های info در کنسول
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(levelname)s %(asctime)s %(message)s',
+)
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -50,7 +59,10 @@ INSTALLED_APPS = [
     'accounts.apps.AccountsConfig',
     'utils.apps.UtilsConfig',
     'tweets.apps.TweetsConfig',
-    'insteractions.apps.InsteractionsConfig',
+    'interactions.apps.InteractionsConfig',
+    #fetures
+    'taggit',
+    'simple_history',
 ]
 
 MIDDLEWARE = [
@@ -134,3 +146,12 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# <---------------- auth user model ---------------->
+AUTH_USER_MODEL = 'accounts.User'
+
+# <---------------- email setting ---------------->
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = '/tmp/app-messages'  # change this to a proper location
