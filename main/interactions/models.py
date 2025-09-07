@@ -8,8 +8,6 @@ User = get_user_model()
 class Follow(BaseModel):
     follower = models.ForeignKey(User, on_delete=models.CASCADE, related_name="following_relation")
     following = models.ForeignKey(User, on_delete=models.CASCADE, related_name="followers_relation")
-    created_at = models.DateTimeField(auto_now_add=True)
-
 
     objects = FollowManager()
     def __str__(self):

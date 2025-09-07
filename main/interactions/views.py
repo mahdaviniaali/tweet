@@ -34,7 +34,7 @@ class FollowViewSet(viewsets.ModelViewSet):
     def followers(self, request):
         user_id = request.query_params.get("user_id", request.user.id)
         user = get_object_or_404(User, pk=user_id)
-        qs = Follow.objects.followers_of(user)
+        qs = Follow.objects.user_following_of(user)
         serializer = self.get_serializer(qs, many=True)
         return Response(serializer.data)
 
@@ -44,7 +44,7 @@ class FollowViewSet(viewsets.ModelViewSet):
     def following(self, request):
         user_id = request.query_params.get("user_id", request.user.id)
         user = get_object_or_404(User, pk=user_id)
-        qs = Follow.objects.following_of(user)
+        qs = Follow.objects.user_following_of(user)
         serializer = self.get_serializer(qs, many=True)
         return Response(serializer.data)
 

@@ -1,5 +1,6 @@
 from rest_framework.routers import DefaultRouter
 from .views import FollowViewSet
+from django.urls import path, include
 
 app_name = 'interactions'
 
@@ -11,5 +12,5 @@ router.register(r'follows', FollowViewSet, basename='follow')
 
 
 urlpatterns = [
-
-] + router.urls
+    path('', include(router.urls)),
+] 
