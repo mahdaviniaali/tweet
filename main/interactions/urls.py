@@ -1,8 +1,15 @@
-from django.urls import path
-from . import views
+from rest_framework.routers import DefaultRouter
+from .views import FollowViewSet
 
 app_name = 'interactions'
 
+
+router = DefaultRouter()
+router.register(r'follows', FollowViewSet, basename='follow')
+
+
+
+
 urlpatterns = [
 
-]
+] + router.urls

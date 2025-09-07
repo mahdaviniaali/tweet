@@ -18,10 +18,15 @@ class User(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)  
     is_verified = models.BooleanField(default=False)  
+    is_superuser = models.BooleanField(default=False)  # New field added
     # زمان‌بندی
     last_login_ip = models.GenericIPAddressField(null=True, blank=True)
     tags = TaggableManager(blank=True, verbose_name=_("تگ ها"))
     following = models.ManyToManyField("self", through="interactions.Follow", symmetrical=False, related_name="followers")
+    like_tweets = models.ManyToManyField("tweets.Tweet", through="interactions.Like", related_name="liked_by")
+
+
+
     objects = UserManager() 
 
     USERNAME_FIELD = 'phone_number'
@@ -39,6 +44,11 @@ class User(AbstractBaseUser):
             'access': str(refresh.access_token),
         }
        
+    def has_perm(self, perm, obj=None):
+        return self.is_superuser
+
+    def has_module_perms(self, app_label):
+        return self.is_superuser
 
 
 # otp code برای احراز هویت دو مرحله‌ای
