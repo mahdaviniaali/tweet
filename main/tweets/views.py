@@ -26,8 +26,8 @@ class TweetViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         following_users= Follow.objects.user_following_of(user=self.request.user).values_list("following", flat=True)
         today = timezone.now().date()
-        #return Tweet.objects.filter(user_id__in=following_users, created_at__date=today)
-        return Tweet.objects.all()
+        return Tweet.objects.filter(user_id__in=following_users, created_at__date=today)
+        #return Tweet.objects.all()
     
 
     def perform_create(self, serializer):

@@ -1,0 +1,6 @@
+# Django Settings
+SECRET_KEY=django-insecure-change-me
+DEBUG=True
+
+# Allowed hosts (comma separated)
+ALLOWED_HOSTS=127.0.0.1,localhost
